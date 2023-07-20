@@ -1,0 +1,79 @@
+<div class="err-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div class="form container">
+  <form (ngSubmit)="onSubmit()" #playerForm="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="firstname">Firstname</label>
+          <input type="text" class="form-control" id="firstname" required maxlength="30"
+                 [(ngModel)]="model.firstname" name="firstname"
+                 #firstname="ngModel">
+          <div [hidden]="firstname.valid || firstname.pristine"
+               class="validation-message">
+            Firstname is required
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="lastName">Lastname</label>
+          <input type="text" class="form-control" id="lastName" required maxlength="30"
+                 [(ngModel)]="model.lastname" name="lastName"
+                 #lastName="ngModel">
+          <div [hidden]="lastName.valid || lastName.pristine"
+               class="validation-message">
+            Lastname is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="text" class="form-control" id="age" required
+                 [(ngModel)]="model.age" name="age"
+                 #age="ngModel">
+          <div [hidden]="age.valid || age.pristine"
+               class="validation-message">
+            Age is required
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="careerStartDate">Career Start Date </label>
+          <input type="text" class="form-control" id="careerStartDate" required
+                 pattern="(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}"
+                 [(ngModel)]="model.careerStartDate" name="careerStartDate"
+                 #careerStartDate="ngModel">
+          <div [hidden]="careerStartDate.valid || careerStartDate.pristine"
+               class="validation-message">
+            Career Start Date is required in format: (dd.mm.yyyy)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="teams.length">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="form-group">
+            <label for="team">Team</label>
+            <select class="form-control" id="team"
+                    [(ngModel)]="model.teamId" name="team">
+              <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+            [disabled]="!playerForm.form.valid">Submit</button>
+  </form>
+</div>

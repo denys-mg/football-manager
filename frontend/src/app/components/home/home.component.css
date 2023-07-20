@@ -1,0 +1,18 @@
+.greetings-card p {
+  text-align: center;
+  font-size: 1.3em;
+  color: #2aa46c;
+  font-family: "Arial", sans-serif;
+  text-shadow: 2px 2px 4px rgb(24 255 50 / 50%);
+  margin: 20px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 500px) {
+  .greetings-card p {
+    font-size: 1em;
+  }
+}

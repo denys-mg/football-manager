@@ -1,0 +1,54 @@
+<div class="err-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="info-message" *ngIf="infoMessage">{{ infoMessage }}</div>
+
+<div *ngIf="team">
+  <h2>{{team.name}} Details</h2>
+  <div>
+    <div class="input-container">
+      <label for="team-name">Name: </label>
+      <input type="text" class="form-control" id="team-name"
+             [(ngModel)]="team.name" placeholder="name" maxlength="60">
+    </div>
+
+    <div class="input-container">
+      <label for="team-country">Country: </label>
+      <input type="text" class="form-control" id="team-country"
+             [(ngModel)]="team.country" placeholder="country" maxlength="20">
+    </div>
+
+    <div class="input-container">
+      <label for="team-city">City: </label>
+      <input type="text" class="form-control" id="team-city"
+             [(ngModel)]="team.city" placeholder="city" maxlength="20">
+    </div>
+
+    <div class="input-container">
+      <label for="team-balance">Balance: </label>
+      <input type="number" class="form-control" id="team-balance"
+             [(ngModel)]="team.balance" placeholder="balance">
+    </div>
+
+    <div class="input-container">
+      <label for="team-fee">Fee: </label>
+      <input type="number" class="form-control" id="team-fee"
+             [(ngModel)]="team.fee" placeholder="fee">
+    </div>
+  </div>
+  <div class="details-buttons">
+    <button class="btn btn-success" type="button" (click)="update()">Save changes</button>
+    <button class="btn btn-info" type="button" (click)="goBack()">Go back</button>
+  </div>
+</div>
+
+<div class="err-message" *ngIf="!hasPlayers">There are no players in this team</div>
+<div class="players-list d-flex flex-column align-items-start" *ngIf="players && players.length">
+  <h2>Players: </h2>
+  <ul class="list">
+    <li *ngFor="let player of players | paginate: {itemsPerPage: itemsPerPage, currentPage: page}">
+      <a class="list-element" routerLink="/players/{{player.id}}">
+        {{player.firstname}} {{player.lastname}}
+      </a>
+    </li>
+  </ul>
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="page = $event"></pagination-controls>
+</div>

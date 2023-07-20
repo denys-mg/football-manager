@@ -1,0 +1,18 @@
+<div class="list-header">
+  <h2>Players</h2>
+  <button class="button btn-create" routerLink="/players-form">
+    Create Player
+  </button>
+</div>
+<div class="err-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<ul class="list">
+  <li *ngFor="let player of players | paginate: {itemsPerPage: itemsPerPage, currentPage: page}">
+    <a class="list-element" routerLink="/players/{{player.id}}">
+      <span class="badge">{{players.indexOf(player) + 1}}</span> {{player.firstname}} {{player.lastname}}
+    </a>
+    <button type="button" class="button btn-delete"
+            (click)="delete(player)">Delete</button>
+  </li>
+</ul>
+<pagination-controls previousLabel="" nextLabel="" (pageChange)="page = $event"></pagination-controls>

@@ -1,0 +1,79 @@
+<div class="err-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div class="form container">
+  <form (ngSubmit)="onSubmit()" #teamForm="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" required maxlength="60"
+                 [(ngModel)]="model.name" name="name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+               class="validation-message">
+            Name is required
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country" required
+                 [(ngModel)]="model.country" name="country"
+                 #country="ngModel">
+          <div [hidden]="country.valid || country.pristine"
+               class="validation-message">
+            Country is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" required
+                 [(ngModel)]="model.city" name="city"
+                 #city="ngModel">
+          <div [hidden]="city.valid || city.pristine"
+               class="validation-message">
+            City is required
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="balance">Balance</label>
+          <input type="number" class="form-control" id="balance" required
+                 [(ngModel)]="model.balance" name="balance"
+                 #balance="ngModel">
+          <div [hidden]="balance.valid || balance.pristine"
+               class="validation-message">
+            Balance is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="form-group">
+          <label for="fee">Fee (0 - 10.0%)</label>
+          <input type="number" class="form-control" id="fee" required
+                 [(ngModel)]="model.fee" name="fee"
+                 #fee="ngModel">
+          <div [hidden]="fee.valid || fee.pristine"
+               class="validation-message">
+            Fee is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+            [disabled]="!teamForm.form.valid">Submit</button>
+  </form>
+</div>

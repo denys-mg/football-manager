@@ -1,0 +1,68 @@
+<div class="err-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="info-message" *ngIf="infoMessage">{{ infoMessage }}</div>
+
+<div class="details-container">
+  <div *ngIf="player">
+    <h2>{{player.firstname}} {{player.lastname}} Details</h2>
+    <div>
+      <div class="input-container">
+        <label for="player-firstname">Firstname: </label>
+        <input type="text" class="form-control" id="player-firstname"
+               [(ngModel)]="player.firstname" placeholder="firstname" maxlength="30">
+      </div>
+
+      <div class="input-container">
+        <label for="player-lastname">Lastname: </label>
+        <input type="text" class="form-control" id="player-lastname"
+               [(ngModel)]="player.lastname" placeholder="lastname" maxlength="30">
+      </div>
+
+      <div class="input-container">
+        <label for="player-age">Age: </label>
+        <input type="number" class="form-control" id="player-age"
+               [(ngModel)]="player.age" placeholder="age">
+      </div>
+
+      <div class="input-container">
+        <label for="player-careerStartDate">Career start data: </label>
+        <input class="form-control" id="player-careerStartDate"
+               [(ngModel)]="player.careerStartDate" placeholder="careerStartDate">
+      </div>
+
+      <div *ngIf="!team && teams.length">
+        <p class="err-message">This player has no team</p>
+        <label for="player-team">Select team: </label>
+        <select class="form-control" id="player-team"
+                [(ngModel)]="player.teamId" name="team">
+          <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="details-buttons">
+      <button class="btn btn-success" type="button" (click)="update()">Save changes</button>
+      <button class="btn btn-info" type="button" (click)="goBack()">Go back</button>
+    </div>
+  </div>
+
+  <div *ngIf="team" class="details-team">
+    <div>
+      <h2>Player's team</h2>
+      <a class="details-team-link" routerLink="/teams/{{team.id}}">
+        <span>{{team.name}}</span>
+      </a>
+    </div>
+    <button class="btn btn-warning" (click)="changeableTeam = !changeableTeam">
+      Make transfer to another team
+    </button>
+
+    <div *ngIf="changeableTeam && player">
+      <label for="team">Team</label>
+      <select class="form-control" id="team" required
+              [(ngModel)]="teamToTransferId" name="team">
+        <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+      </select>
+      <button class="btn btn-success" (click)="changeTeam()">Transfer</button>
+    </div>
+  </div>
+</div>
